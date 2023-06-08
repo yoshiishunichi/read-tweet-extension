@@ -1,0 +1,52 @@
+{
+  "env": {
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "import",
+    "react",
+    "sort-keys-fix",
+    "@typescript-eslint",
+    "typescript-sort-keys",
+    "unused-imports"
+  ],
+  "rules": {
+    "import/no-duplicates": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
+    "react/jsx-sort-props": "error",
+    "react/react-in-jsx-scope": "off",
+    "sort-keys-fix/sort-keys-fix": "error",
+    "typescript-sort-keys/interface": "error",
+    "unused-imports/no-unused-imports": "error"
+  }
+}
