@@ -4,41 +4,26 @@ export const config: PlasmoCSConfig = {
   matches: ["https://tweetdeck.twitter.com/"],
 };
 
-const read = () => {
-  const tweetTextList = document.querySelectorAll(".tweet-text");
-  console.log("tweetTextList: ", tweetTextList);
-  const tweetText = tweetTextList[0];
-  if (tweetText) {
-    if ("speechSynthesis" in window) {
-      const { textContent } = tweetText;
-      console.log(textContent);
-      const uttr = new SpeechSynthesisUtterance();
-      uttr.text = textContent;
+const readStart = () => {
+  button.onclick = readEnd;
+  button.textContent = "読み上げ終了";
 
-      // 言語を設定
-      uttr.lang = "ja-JP";
+  // タイムライン監視の処理を書く
+};
 
-      // 速度を設定
-      uttr.rate = 1;
+const readEnd = () => {
+  button.onclick = readStart;
+  button.textContent = "読み上げ開始";
 
-      // 高さを設定
-      uttr.pitch = 1;
-
-      // 音量を設定
-      uttr.volume = 1;
-
-      window.speechSynthesis.speak(uttr);
-    } else {
-      alert("大変申し訳ありません。このブラウザは音声合成に対応していません。");
-    }
-  }
+  // タイムライン監視の終了の処理を書く};
 };
 
 const button = document.createElement("button");
-button.textContent = "押してね";
+button.textContent = "読み上げ開始";
 button.style.position = "fixed";
-button.style.bottom = "0px";
-button.style.right = "0px";
-button.onclick = read;
+button.style.zIndex = "10000";
+button.style.bottom = "10px";
+button.style.right = "10px";
+button.onclick = readStart;
 
 document.body.appendChild(button);
