@@ -1,5 +1,7 @@
 import type { PlasmoCSConfig } from "plasmo";
 
+import { speechText } from "~libs/speech";
+
 export const config: PlasmoCSConfig = {
   matches: ["https://tweetdeck.twitter.com/"],
 };
@@ -11,7 +13,12 @@ const mutatinObserverConfig: MutationObserverInit = {
 const callback = (mutations: MutationRecord[]) => {
   for (const mutation of mutations) {
     if (mutation.type === "childList" && mutation.removedNodes.length === 0) {
-      console.log("ツイート追加されたぞ");
+      const tweetTextList = document.querySelectorAll(".tweet-text");
+      const tweetText = tweetTextList[0];
+      if (tweetText) {
+        const { textContent } = tweetText;
+        speechText(textContent);
+      }
     }
   }
 };
