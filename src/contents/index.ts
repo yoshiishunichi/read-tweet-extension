@@ -10,19 +10,21 @@ const mutatinObserverConfig: MutationObserverInit = {
   childList: true,
 };
 
-const callback = (mutations: MutationRecord[]) => {
+const observeerCallback = (mutations: MutationRecord[]) => {
   for (const mutation of mutations) {
     if (mutation.type === "childList" && mutation.removedNodes.length === 0) {
-      const tweetTextList = document.querySelectorAll(".tweet-text");
-      const tweetText = tweetTextList[0];
-      if (tweetText) {
-        const { textContent } = tweetText;
-        speechText(textContent);
-      }
+      mutation.addedNodes.forEach((node: HTMLElement) => {
+        const tweetTextList = node.querySelectorAll(".tweet-text");
+        const tweetText = tweetTextList[0];
+        if (tweetText) {
+          const { textContent } = tweetText;
+          speechText(textContent);
+        }
+      });
     }
   }
 };
-const observer = new MutationObserver(callback);
+const observer = new MutationObserver(observeerCallback);
 
 const readStart = () => {
   button.onclick = readEnd;
