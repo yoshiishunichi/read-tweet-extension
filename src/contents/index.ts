@@ -28,7 +28,6 @@ const readStart = () => {
   button.onclick = readEnd;
   button.textContent = "読み上げ終了";
 
-  // タイムライン監視の処理を書く
   const tweetContainerList = document.querySelectorAll(".js-chirp-container");
   const tweetContainer = tweetContainerList[0];
 
@@ -41,7 +40,6 @@ const readEnd = () => {
   button.onclick = readStart;
   button.textContent = "読み上げ開始";
 
-  // タイムライン監視の終了の処理を書く};
   observer.disconnect();
 };
 
